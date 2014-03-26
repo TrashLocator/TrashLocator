@@ -27,6 +27,42 @@
 
     //var minZoomLevel = 15;
 
+    //var transitLayer = new google.maps.TransitLayer();
+    //transitLayer.setMap(map);
+
+
+    
+
+    // Strict bounds for New York CIty
+    var strictBounds = new google.maps.LatLngBounds(
+      new google.maps.LatLng(40.555026, -74.196167),
+      new google.maps.LatLng(40.857448, -73.711395)
+    );
+
+
+
+    // Listen for the end of a drag event
+    google.maps.event.addListener(map, 'dragend', function () {
+        if (strictBounds.contains(map.getCenter())) return;
+
+    //moves map back into position if dragged out of coordinates
+    var c = map.getCenter(),
+        x = c.lng(),
+        y = c.lat(),
+        maxX = strictBounds.getNorthEast().lng(),
+        maxY = strictBounds.getNorthEast().lat(),
+        minX = strictBounds.getSouthWest().lng(),
+        minY = strictBounds.getSouthWest().lat();
+
+    if (x < minX) x = minX;
+    if (x > maxX) x = maxX;
+    if (y < minY) y = minY;
+    if (y > maxY) y = maxY;
+
+    map.setCenter(new google.maps.LatLng(y, x));
+    });
+
+    // Adds zoom limit for both zooming in and out
     google.maps.event.addListener(map, 'zoom_changed', function () {
         if (map.getZoom() < minZoomLevel) map.setZoom(minZoomLevel);
         if (map.getZoom() > maxZoomLevel) map.setZoom(maxZoomLevel);
