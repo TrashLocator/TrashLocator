@@ -8,11 +8,17 @@
       }
     </style>
 </head>
-<h1>Using geolocation</h1>
 
 <div id="coords"></div>
 
-<div id="map">
-the map</div>
- <script src="https://maps.googleapis.com/maps/api/js?v=3.exp&sensor=false"></script>
-<script src="/static/script.js"></script>
+<div id="map"></div>
+ <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDd17lxbeJH7BNiIVXKj_70msufrVnK9lM&sensor=false"></script>
+<script type="text/javascript">
+
+    var map = new google.maps.Map(document.getElementById('map'), {
+        zoom: minZoomLevel,
+        center: new google.maps.LatLng(40.7056308, -73.9780035),
+        mapTypeId: google.maps.MapTypeId.ROADMAP
+    });
+
+   </script> 
