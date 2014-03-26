@@ -15,10 +15,21 @@
  <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDd17lxbeJH7BNiIVXKj_70msufrVnK9lM&sensor=false"></script>
 <script type="text/javascript">
 
+    
+    var minZoomLevel = 11;
+    var maxZoomLevel = 17;
+
     var map = new google.maps.Map(document.getElementById('map'), {
         zoom: minZoomLevel,
         center: new google.maps.LatLng(40.7056308, -73.9780035),
         mapTypeId: google.maps.MapTypeId.ROADMAP
+    });
+
+    //var minZoomLevel = 15;
+
+    google.maps.event.addListener(map, 'zoom_changed', function () {
+        if (map.getZoom() < minZoomLevel) map.setZoom(minZoomLevel);
+        if (map.getZoom() > maxZoomLevel) map.setZoom(maxZoomLevel);
     });
 
    </script> 
