@@ -1,71 +1,115 @@
-<head>
-
- <style>
-      html, body, #map {
-        height: 100%;
-        margin: 0px;
-        padding: 0px
-      }
-    </style>
-</head>
-
-<div id="coords"></div>
-
-<div id="map"></div>
- <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDd17lxbeJH7BNiIVXKj_70msufrVnK9lM&sensor=false"></script>
-<script type="text/javascript">
-
+<!doctype html>
+<html class="no-js" lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>TrashLocator</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/foundation.css') }}" />
+    <script src="{{ url_for('static', filename='js/vendor/custom.modernizr.js') }}"></script>
+  </head>
+  <body>
+    <!--________________________________________________________________________-->
     
-    var minZoomLevel = 11;
-    var maxZoomLevel = 17;
-
-    var map = new google.maps.Map(document.getElementById('map'), {
-        zoom: minZoomLevel,
-        center: new google.maps.LatLng(40.7056308, -73.9780035),
-        mapTypeId: google.maps.MapTypeId.ROADMAP
-    });
-
-    //var minZoomLevel = 15;
-
-    //var transitLayer = new google.maps.TransitLayer();
-    //transitLayer.setMap(map);
-
-
+     <div class="row">
+    <div class="large-3 columns">
+      <h1><img src="http://placehold.it/400x100&text=Logo" /></h1>
+    </div>
+    <div class="large-9 columns">
+      <ul class="right button-group">
+      <li><a href="#" class="button">Link 1</a></li>
+      <li><a href="#" class="button">Link 2</a></li>
+      <li><a href="#" class="button">Link 3</a></li>
+      <li><a href="#" class="button">Link 4</a></li>
+      </ul>
+     </div>
+   </div>
+  
+<!-- End Header and Nav -->
+ 
+<!-- First Band (Slider) -->
+ 
+  <div class="row">
+    <div class="large-12 columns">
+    <div id="slider">
+      <img src="http://placehold.it/1000x400&text=[ img 1 ]" />
+    </div>
+    
+    <hr />
+    </div>
+  </div>
+  
+<!-- Three-up Content Blocks -->
+ 
+  <div class="row">
+    <div class="large-4 columns">
+      <img src="http://placehold.it/400x300&text=[img]" />
+      <h4>This is a content section.</h4>
+      <p>Bacon ipsum dolor sit amet nulla ham qui sint exercitation eiusmod commodo, chuck duis velit. Aute in reprehenderit, dolore aliqua non est magna in labore pig pork biltong. Eiusmod swine spare ribs reprehenderit culpa. Boudin aliqua adipisicing rump corned beef.</p>
+    </div>
+    
+    <div class="large-4 columns">
+      <img src="http://placehold.it/400x300&text=[img]" />
+      <h4>This is a content section.</h4>
+      <p>Bacon ipsum dolor sit amet nulla ham qui sint exercitation eiusmod commodo, chuck duis velit. Aute in reprehenderit, dolore aliqua non est magna in labore pig pork biltong. Eiusmod swine spare ribs reprehenderit culpa. Boudin aliqua adipisicing rump corned beef.</p>
+    </div>
+    
+    <div class="large-4 columns">
+      <img src="http://placehold.it/400x300&text=[img]" />
+      <h4>This is a content section.</h4>
+      <p>Bacon ipsum dolor sit amet nulla ham qui sint exercitation eiusmod commodo, chuck duis velit. Aute in reprehenderit, dolore aliqua non est magna in labore pig pork biltong. Eiusmod swine spare ribs reprehenderit culpa. Boudin aliqua adipisicing rump corned beef.</p>
+    </div>
+  
+    </div>
+    
+<!-- Call to Action Panel -->
+<div class="row">
+    <div class="large-12 columns">
+    
+      <div class="panel">
+        <h4>Get in touch!</h4>
+            
+        <div class="row">
+          <div class="large-9 columns">
+            <p>We'd love to hear from you, you attractive person you.</p>
+          </div>
+          <div class="large-3 columns">
+            <a href="#" class="radius button right">Contact Us</a>
+          </div>
+        </div>
+      </div>
+      
+    </div>
+  </div>
+ 
+  <!-- Footer -->
+  
+  <footer class="row">
+    <div class="large-12 columns">
+      <hr />
+      <div class="row">
+        <div class="large-6 columns">
+          <p>© Copyright no one at all. Go to town.</p>
+        </div>
+        <div class="large-6 columns">
+          <ul class="inline-list right">
+            <li><a href="#">Link 1</a></li>
+            <li><a href="#">Link 2</a></li>
+            <li><a href="#">Link 3</a></li>
+            <li><a href="#">Link 4</a></li>
+          </ul>
+        </div>
+      </div>
+    </div> 
+  </footer>
+    
     
 
-    // Strict bounds for New York CIty
-    var strictBounds = new google.maps.LatLngBounds(
-      new google.maps.LatLng(40.555026, -74.196167),
-      new google.maps.LatLng(40.857448, -73.711395)
-    );
+    <!--________________________________________________________________________-->
 
-
-
-    // Listen for the end of a drag event
-    google.maps.event.addListener(map, 'dragend', function () {
-        if (strictBounds.contains(map.getCenter())) return;
-
-    //moves map back into position if dragged out of coordinates
-    var c = map.getCenter(),
-        x = c.lng(),
-        y = c.lat(),
-        maxX = strictBounds.getNorthEast().lng(),
-        maxY = strictBounds.getNorthEast().lat(),
-        minX = strictBounds.getSouthWest().lng(),
-        minY = strictBounds.getSouthWest().lat();
-
-    if (x < minX) x = minX;
-    if (x > maxX) x = maxX;
-    if (y < minY) y = minY;
-    if (y > maxY) y = maxY;
-
-    map.setCenter(new google.maps.LatLng(y, x));
-    });
-
-    // Adds zoom limit for both zooming in and out
-    google.maps.event.addListener(map, 'zoom_changed', function () {
-        if (map.getZoom() < minZoomLevel) map.setZoom(minZoomLevel);
-        if (map.getZoom() > maxZoomLevel) map.setZoom(maxZoomLevel);
-    });
-
-   </script> 
+    <script src="{{ url_for('static', filename='js/jquery.js')}}"></script>
+    <script src="{{ url_for('static', filename='js/foundation.min.js')}}"></script>
+    <script>
+      $(document).foundation();
+    </script>
+  </body>
+</html>
