@@ -5,13 +5,19 @@ import os,hashlib
 
 
 app = Flask(__name__)
-
+app.secret_key="secret key"
 
 @app.route("/")
 def index():
-    return render_template("index.html")
-    
-@app.route("/input")
+    if request.method == "GET":
+        return render_template("index.html")
+    else:
+        button=request.form['button'].encode("utf8")
+        if button == "Submit":
+            loc=request.form['location'].encode("utf8")
+            lev=request.form['trash'].encode("utf8")
+            
+@app.route("/input", methods=['GET','POST'])
 def input(): 
     return render_template("input.html")
     
