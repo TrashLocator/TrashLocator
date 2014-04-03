@@ -79,6 +79,36 @@
             document.getElementById('address').innerHTML = str;
         }
 
+        function GeoLocation(controlDiv, map) {
+
+            controlDiv.style.padding = '5px';
+
+            // Set CSS for the control border
+            var controlUI = document.createElement('div');
+            controlUI.style.backgroundColor = 'white';
+            controlUI.style.borderStyle = 'solid';
+            controlUI.style.borderWidth = '1px';
+            controlUI.style.cursor = 'pointer';
+            controlUI.style.textAlign = 'center';
+            controlUI.title = 'Click to place a marker at your current position';
+            controlDiv.appendChild(controlUI);
+
+            // Set CSS for the control interior
+            var controlText = document.createElement('div');
+            controlText.style.fontFamily = 'Arial,sans-serif';
+            controlText.style.fontSize = '12px';
+            controlText.style.paddingLeft = '4px';
+            controlText.style.paddingRight = '4px';
+            controlText.innerHTML = '<b>Current Location</b>';
+            controlUI.appendChild(controlText);
+
+            // Will call place marker to place marker at geolocation
+            google.maps.event.addDomListener(controlUI, 'click', function () {
+                
+            });
+
+        }
+
         var markers = [];
         function initialize() {
 
@@ -89,9 +119,13 @@
             //turn off ability to pan(for boundary concerns)
             var mapOptions = {
                 panControl: false,
-                scaleControl: true
+                scaleControl: true,
+                streetViewControl: false
             }
             var map = new google.maps.Map(document.getElementById('map-canvas'), {
+                panControl: false,
+                scaleControl: true,
+                streetViewControl: false,
                 mapTypeId: google.maps.MapTypeId.ROADMAP
             });
 
@@ -171,6 +205,12 @@
                 searchBox.setBounds(bounds);
             });
 
+            var geoLocationDiv = document.createElement('div');
+            var geoLocation = new GeoLocation(geoLocationDiv, map);
+
+
+            map.controls[google.maps.ControlPosition.TOP_RIGHT].push(geoLocationDiv);
+
         }
 
         //places markers given position
@@ -196,9 +236,9 @@
                 '<p> Email Address: <input type = "text" name = "email" value = ""> </p>' +
                  //'<p> Neighborhood/address: <input type = "text" name = "location" value = ""> </p>'+
                 '<p> Severity of trash:  0<input type="range" name="trash" min="1" max="10">10 </p>' +
-                '<p> Attach a photo: <input type="file" name="photo" allow = "image/*"></p>' +
-                '<input type = "submit" name = "button" value = "Submit">' +
-                '<input onclick="deleteMarkers();" type=button value="Delete Markers">'
+                '<p> Attach a photo:<input type="file" name="photo" allow = "image/*"><p>'+
+                '<p><input type = "submit" name = "button" value = "Submit">' +
+                '<input onclick="deleteMarkers();" type=button value="Delete Markers"></p>'
                 '<br>' +
                 '</form>' +
                 '</div>' +
