@@ -61,12 +61,11 @@
         // This example adds a search box to a map, using the Google Place Autocomplete
         // feature. People can enter geographical searches. The search box will return a
         // pick list containing a mix of places and predicted search terms.
-
+        var markers = [];
         function initialize() {
 
             var minZoomLevel = 11;
             var maxZoomLevel = 17;
-            var markers = [];
 
             //turn off ability to pan(for boundary concerns)
             var mapOptions = {
@@ -108,7 +107,7 @@
             });
 
             google.maps.event.addListener(map, 'click', function (e) {
-                //deleteMarkers();
+                deleteMarkers();
                 placeMarker(e.latLng, map);
             });
 
@@ -205,6 +204,17 @@
             });
             markers.push(marker);
             map.panTo(position);
+        }
+
+        function setAllMap(map) {
+            for (var i = 0; i < markers.length; i++) {
+                markers[i].setMap(map);
+            }
+        }
+
+        // Removes the markers from the map, but keeps them in the array.
+        function clearMarkers() {
+            setAllMap(null);
         }
 
         // Deletes all markers in the array by removing references to them.
