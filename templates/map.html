@@ -61,11 +61,30 @@
         // This example adds a search box to a map, using the Google Place Autocomplete
         // feature. People can enter geographical searches. The search box will return a
         // pick list containing a mix of places and predicted search terms.
+        var geocoder = new google.maps.Geocoder();
+
+        function geocodePosition(pos) {
+            geocoder.geocode({
+                latLng: pos
+            }, function (responses) {
+                if (responses && responses.length > 0) {
+                    updateMarkerAddress(responses[0].formatted_address);
+                } else {
+                    updateMarkerAddress('Cannot determine address at this location.');
+                }
+            });
+        }
+
+        function updateMarkerAddress(str) {
+            document.getElementById('address').innerHTML = str;
+        }
+
         var markers = [];
         function initialize() {
 
             var minZoomLevel = 11;
             var maxZoomLevel = 17;
+            
 
             //turn off ability to pan(for boundary concerns)
             var mapOptions = {
@@ -108,7 +127,7 @@
 
             google.maps.event.addListener(map, 'click', function (e) {
                 deleteMarkers();
-                placeMarker(e.latLng, map);
+                placeMarker(e.latLng, map,"");
             });
 
             // Create the search box and link it to the UI element.
@@ -135,54 +154,12 @@
                 //for (var i = 0, place; place = places[i]; i++) {
                 //places only first location in queue
                 place = places[0]
-                    /*var image = {
-                        url: place.icon,
-                        size: new google.maps.Size(71, 71),
-                        origin: new google.maps.Point(0, 0),
-                        anchor: new google.maps.Point(17, 34),
-                        scaledSize: new google.maps.Size(25, 25)
-                    };
-                    */
-                    // Create a marker for each place.
-                    var marker = new google.maps.Marker({
-                        map: map,
-                        //icon: image,
-                        title: place.name,
-                        draggable: true,
-                        position: place.geometry.location
-                    });
 
-                    markers.push(marker);
+                //calls placeMarker to place marker
+                placeMarker(place.geometry.location, map, place.name)
 
-                    bounds.extend(place.geometry.location);
-
-                    var contentString = '<div id="content">' +
-                      '<div id="siteNotice">' +
-                      '</div>' +
-                      '<h1 style = "text-align:center"> Report Trash </h1>'+
-                      '<form method = "POST" align = "center">' +
-                      '<p> Email Address: <input type = "text" name = "email" value = ""> </p>'+
-                      //will use current location as 'Neighborhood/address"
-                      //'<p> Neighborhood/address: <input type = "text" name = "location" value = ""> </p>'+
-                      '<p> Severity of trash:  0<input type="range" name="trash" min="1" max="10">10 </p>' +
-                      '<p> Attach a photo: <input type="file" name="photo" allow = "image/*"></p>'+
-                      '<input type = "submit" name = "button" value = "Submit">' +
-                      '<input onclick="deleteMarkers();" type=button value="Delete Markers">'
-                      '<br>'+
-                      '<a href = "/"> Back to index page </href>'+
-                      '</form>'+
-                      '</div>' +
-                      '</div>';
-
-                    var infowindow = new google.maps.InfoWindow({
-                        content: contentString
-                    });
-
-                    google.maps.event.addListener(marker, 'click', function () {
-                        infowindow.open(map, marker);
-                    });
-                //}
-
+                //adjusts window
+                bounds.extend(place.geometry.location);
                 map.fitBounds(bounds);
             });
             // [END region_getplaces]
@@ -197,13 +174,54 @@
         }
 
         //places markers given position
-        function placeMarker(position, map) {
+        function placeMarker(position, map,name) {
             var marker = new google.maps.Marker({
                 position: position,
-                map: map
+                map: map,
+                title:name,
+                draggable:true
             });
             markers.push(marker);
             map.panTo(position);
+
+            //form to submit trash removal
+            var contentString = '<div id="content">' +
+                '<div id="siteNotice">' +
+                '</div>' +
+                '<h1 style = "text-align:center"> Report Trash </h1>' +
+                '<form method = "POST" align = "center">' +
+                //displays the closest address to marker
+                '<b>Closest matching address:</b>' +
+                '<div id="address"></div>' +
+                '<p> Email Address: <input type = "text" name = "email" value = ""> </p>' +
+                 //'<p> Neighborhood/address: <input type = "text" name = "location" value = ""> </p>'+
+                '<p> Severity of trash:  0<input type="range" name="trash" min="1" max="10">10 </p>' +
+                '<p> Attach a photo: <input type="file" name="photo" allow = "image/*"></p>' +
+                '<input type = "submit" name = "button" value = "Submit">' +
+                '<input onclick="deleteMarkers();" type=button value="Delete Markers">'
+                '<br>' +
+                '</form>' +
+                '</div>' +
+                '</div>';
+
+            var infowindow = new google.maps.InfoWindow({
+                content: contentString
+            });
+
+            google.maps.event.addListener(marker, 'click', function () {
+                infowindow.open(map, marker);
+                geocodePosition(marker.getPosition());
+            });
+
+
+            google.maps.event.addListener(marker, 'dragstart', function () {
+                updateMarkerAddress('Dragging...');
+            });
+
+            google.maps.event.addListener(marker, 'dragend', function () {
+                geocodePosition(marker.getPosition());
+            });
+
         }
 
         function setAllMap(map) {
