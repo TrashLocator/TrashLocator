@@ -67,6 +67,12 @@
             var minZoomLevel = 11;
             var maxZoomLevel = 17;
             var markers = [];
+
+            //turn off ability to pan(for boundary concerns)
+            var mapOptions = {
+                panControl: false,
+                scaleControl: true
+            }
             var map = new google.maps.Map(document.getElementById('map-canvas'), {
                 mapTypeId: google.maps.MapTypeId.ROADMAP
             });
@@ -101,6 +107,11 @@
                 if (map.getZoom() > maxZoomLevel) map.setZoom(maxZoomLevel);
             });
 
+            google.maps.event.addListener(map, 'click', function (e) {
+                //deleteMarkers();
+                placeMarker(e.latLng, map);
+            });
+
             // Create the search box and link it to the UI element.
             var input = /** @type {HTMLInputElement} */(
                 document.getElementById('pac-input'));
@@ -122,20 +133,23 @@
                 // For each place, get the icon, place name, and location.
                 markers = [];
                 var bounds = new google.maps.LatLngBounds();
-                for (var i = 0, place; place = places[i]; i++) {
-                    var image = {
+                //for (var i = 0, place; place = places[i]; i++) {
+                //places only first location in queue
+                place = places[0]
+                    /*var image = {
                         url: place.icon,
                         size: new google.maps.Size(71, 71),
                         origin: new google.maps.Point(0, 0),
                         anchor: new google.maps.Point(17, 34),
                         scaledSize: new google.maps.Size(25, 25)
                     };
-
+                    */
                     // Create a marker for each place.
                     var marker = new google.maps.Marker({
                         map: map,
-                        icon: image,
+                        //icon: image,
                         title: place.name,
+                        draggable: true,
                         position: place.geometry.location
                     });
 
@@ -147,10 +161,14 @@
                       '<div id="siteNotice">' +
                       '</div>' +
                       '<h1 style = "text-align:center"> Report Trash </h1>'+
-                      '<form method = "POST" align = "center">'+
-                      '<p> Neighborhood/address: <input type = "text" name = "location" value = "Address"> </p>'+
-                      '<p> Severity of trash: <input type = "text" name = "trash" value = "Level"> </p>'+
-                      '<input type = "submit" name = "button" value = "Submit">'+
+                      '<form method = "POST" align = "center">' +
+                      '<p> Email Address: <input type = "text" name = "email" value = ""> </p>'+
+                      //will use current location as 'Neighborhood/address"
+                      //'<p> Neighborhood/address: <input type = "text" name = "location" value = ""> </p>'+
+                      '<p> Severity of trash:  0<input type="range" name="trash" min="1" max="10">10 </p>' +
+                      '<p> Attach a photo: <input type="file" name="photo" allow = "image/*"></p>'+
+                      '<input type = "submit" name = "button" value = "Submit">' +
+                      '<input onclick="deleteMarkers();" type=button value="Delete Markers">'
                       '<br>'+
                       '<a href = "/"> Back to index page </href>'+
                       '</form>'+
@@ -164,7 +182,7 @@
                     google.maps.event.addListener(marker, 'click', function () {
                         infowindow.open(map, marker);
                     });
-                }
+                //}
 
                 map.fitBounds(bounds);
             });
@@ -176,6 +194,23 @@
                 var bounds = map.getBounds();
                 searchBox.setBounds(bounds);
             });
+
+        }
+
+        //places markers given position
+        function placeMarker(position, map) {
+            var marker = new google.maps.Marker({
+                position: position,
+                map: map
+            });
+            markers.push(marker);
+            map.panTo(position);
+        }
+
+        // Deletes all markers in the array by removing references to them.
+        function deleteMarkers() {
+            clearMarkers();
+            markers = [];
         }
 
         google.maps.event.addDomListener(window, 'load', initialize);
