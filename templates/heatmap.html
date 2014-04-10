@@ -1,0 +1,271 @@
+﻿<!DOCTYPE html>
+<html>
+  <head>
+    <meta name="viewport" content="initial-scale=1.0, user-scalable=no">
+    <meta charset="utf-8">
+    <style>
+      html, body, #map-canvas {
+        height: 100%;
+        margin: 0px;
+        padding: 0px
+      }
+      .controls {
+        margin-top: 16px;
+        border: 1px solid transparent;
+        border-radius: 2px 0 0 2px;
+        box-sizing: border-box;
+        -moz-box-sizing: border-box;
+        height: 32px;
+        outline: none;
+        box-shadow: 0 2px 6px rgba(0, 0, 0, 0.3);
+      }
+
+      #pac-input {
+        background-color: #fff;
+        padding: 0 11px 0 13px;
+        width: 400px;
+        font-family: Roboto;
+        font-size: 15px;
+        font-weight: 300;
+        text-overflow: ellipsis;
+      }
+
+      #pac-input:focus {
+        border-color: #4d90fe;
+        margin-left: -1px;
+        padding-left: 14px;  /* Regular padding-left + 1. */
+        width: 401px;
+      }
+
+      .pac-container {
+        font-family: Roboto;
+      }
+
+      #type-selector {
+        color: #fff;
+        background-color: #4d90fe;
+        padding: 5px 11px 0px 11px;
+      }
+
+      #type-selector label {
+        font-family: Roboto;
+        font-size: 13px;
+        font-weight: 300;
+      }
+}
+
+    </style>
+    <script src="https://maps.googleapis.com/maps/api/js?v=3.exp&sensor=false&libraries=visualization"></script>
+    <script>
+        // Adding 500 Data Points
+        var map, pointarray, heatmap;
+
+        var taxiData = [
+            new google.maps.LatLng(40.79068883889194, -73.82604406320938),
+            new google.maps.LatLng(40.745441439798356, -73.9753944383944),
+            new google.maps.LatLng(40.740694693602684, -73.81293802003874),
+            new google.maps.LatLng(40.8498946126499, -73.93331100990974),
+            new google.maps.LatLng(40.7134547128263, -73.95151949826914),
+            new google.maps.LatLng(40.663839000311185, -73.73984865733841),
+            new google.maps.LatLng(40.663839000311185, -73.73984865733841),
+            new google.maps.LatLng(40.64889589631403, -74.01511027062564),
+            new google.maps.LatLng(40.620954647567004, -74.0365009017785),
+            new google.maps.LatLng(40.77644512492342, -73.9082837214441),
+            new google.maps.LatLng(40.717269241115126, -73.75116936280058),
+            new google.maps.LatLng(40.84167715154349, -73.92470315280627),
+            new google.maps.LatLng(40.62752034441855, -73.93818769191937),
+            new google.maps.LatLng(40.776864660213896, -73.90777043600923),
+            new google.maps.LatLng(40.57934180934774, -73.83582838916105),
+            new google.maps.LatLng(40.67638691148331, -73.89157433137026),
+            new google.maps.LatLng(40.63961508483971, -74.08185724602093),
+            new google.maps.LatLng(40.63667160445518, -74.11514564888309),
+            new google.maps.LatLng(40.60632052334881, -74.06504113596849),
+            new google.maps.LatLng(40.79292080673259, -73.94578437325998),
+            new google.maps.LatLng(40.79338047489276, -73.84256694374058),
+            new google.maps.LatLng(40.61048476331037, -74.06908620759071),
+            new google.maps.LatLng(40.61048476331037, -74.06908620759071),
+            new google.maps.LatLng(40.62911404560395, -73.97000097052094),
+            new google.maps.LatLng(40.62883077015741, -73.96791879135583),
+            new google.maps.LatLng(40.76229880689474, -73.87110031204458),
+            new google.maps.LatLng(40.62855703870913, -74.07685409202747),
+            new google.maps.LatLng(40.63720892939505, -74.13816654080291),
+            new google.maps.LatLng(40.78969179995359, -73.97381077558211),
+            new google.maps.LatLng(40.78969179995359, -73.97381077558211),
+            new google.maps.LatLng(40.67865612543121, -73.86731417558394),
+            new google.maps.LatLng(40.65807036850394, -73.86979876095916),
+            new google.maps.LatLng(40.63695332773468, -74.15150810427706),
+            new google.maps.LatLng(40.74228032227006, -73.91793000784634),
+            new google.maps.LatLng(40.63008859442735, -74.12901540765523),
+            new google.maps.LatLng(40.63012426451611, -74.12902628465095),
+            new google.maps.LatLng(40.62997333767091, -74.1289935688155),
+            new google.maps.LatLng(40.87666150302459, -73.84120177137068),
+            new google.maps.LatLng(40.74096535896873, -73.79153779574808),
+            new google.maps.LatLng(40.84427623546399, -73.90581200725165),
+            new google.maps.LatLng(40.5993492160522, -74.07754427691685),
+            new google.maps.LatLng(40.63161838063056, -74.11791826077044),
+            new google.maps.LatLng(40.68291814456321, -73.78808126836697),
+            new google.maps.LatLng(40.613469981227055, -73.93861490646852),
+            new google.maps.LatLng(40.64153033470352, -73.90997894452532),
+            new google.maps.LatLng(40.564786351132845, -74.09932942826477),
+            new google.maps.LatLng(40.61039957066801, -74.06925899683402),
+            new google.maps.LatLng(40.61039957066801, -74.06925899683402),
+            new google.maps.LatLng(40.81479557790464, -73.80047913706204),
+            new google.maps.LatLng(40.66670751762766, -73.90237519166723),
+            new google.maps.LatLng(40.662247747671685, -73.73062392465658),
+            new google.maps.LatLng(40.76343015682519, -73.99270080927215),
+            new google.maps.LatLng(40.66479184991798, -73.73048749066321),
+            new google.maps.LatLng(40.62674611257796, -74.00895219671466),
+            new google.maps.LatLng(40.65286987551215, -73.92660648090947),
+            new google.maps.LatLng(40.68401502396275, -73.77175523637683),
+            new google.maps.LatLng(40.65314997633425, -73.94116240740084),
+            new google.maps.LatLng(40.65386260910278, -73.9295930708907),
+            new google.maps.LatLng(40.66696656932892, -73.93021366028887),
+            new google.maps.LatLng(40.64848540581597, -73.92497884201671),
+            new google.maps.LatLng(40.64649941315554, -73.92689096262488),
+            new google.maps.LatLng(40.64773138568056, -73.9143309684125),
+            new google.maps.LatLng(40.76880295779173, -73.76868841702085),
+            new google.maps.LatLng(40.65127744708656, -73.94002525195557),
+            new google.maps.LatLng(40.69766247914793, -73.98614810344502),
+            new google.maps.LatLng(40.651228523952554, -73.94095868439308),
+            new google.maps.LatLng(40.572348373157574, -74.12459520582695),
+            new google.maps.LatLng(40.6803045733674, -73.85717253526201),
+            new google.maps.LatLng(40.672887413346416, -73.95963136613062),
+            new google.maps.LatLng(40.67279115648551, -73.959094282206),
+            new google.maps.LatLng(40.736187165761024, -73.91820453532844),
+            new google.maps.LatLng(40.672992107650195, -73.96076687522964),
+            new google.maps.LatLng(40.81528418704253, -73.86248254581098),
+            new google.maps.LatLng(40.67342899182936, -73.96215454921956),
+            new google.maps.LatLng(40.702236535270245, -73.95074863647652),
+            new google.maps.LatLng(40.61983670449875, -73.93641175712229),
+            new google.maps.LatLng(40.67329705625501, -73.96159224277311),
+            new google.maps.LatLng(40.71018557878856, -73.85393073499904)
+        ];
+
+        function initialize() {
+            var minZoomLevel = 11;
+            var maxZoomLevel = 17;
+
+
+            //turn off ability to pan(for boundary concerns)
+            var mapOptions = {
+                panControl: false,
+                scaleControl: true,
+                streetViewControl: false
+            }
+            var map = new google.maps.Map(document.getElementById('map-canvas'), {
+                panControl: false,
+                scaleControl: true,
+                streetViewControl: false,
+                mapTypeId: google.maps.MapTypeId.ROADMAP
+            });
+
+            var strictBounds = new google.maps.LatLngBounds(
+                new google.maps.LatLng(40.555026, -74.196167),
+                new google.maps.LatLng(40.857448, -73.711395));
+            map.fitBounds(strictBounds);
+
+            google.maps.event.addListener(map, 'dragend', function () {
+                if (strictBounds.contains(map.getCenter())) return;
+
+                //moves map back into position if dragged out of coordinates
+                var c = map.getCenter(),
+                    x = c.lng(),
+                    y = c.lat(),
+                    maxX = strictBounds.getNorthEast().lng(),
+                    maxY = strictBounds.getNorthEast().lat(),
+                    minX = strictBounds.getSouthWest().lng(),
+                    minY = strictBounds.getSouthWest().lat();
+
+                if (x < minX) x = minX;
+                if (x > maxX) x = maxX;
+                if (y < minY) y = minY;
+                if (y > maxY) y = maxY;
+
+                map.setCenter(new google.maps.LatLng(y, x));
+            });
+
+            google.maps.event.addListener(map, 'zoom_changed', function () {
+                if (map.getZoom() < minZoomLevel) map.setZoom(minZoomLevel);
+                if (map.getZoom() > maxZoomLevel) map.setZoom(maxZoomLevel);
+            });
+
+            var pointArray = new google.maps.MVCArray(taxiData);
+
+            heatmap = new google.maps.visualization.HeatmapLayer({
+                data: pointArray
+            });
+
+            heatmap.setMap(map);
+            heatmap.set('radius', heatmap.get('radius') ? null : 40);
+
+            // Create the search box and link it to the UI element.
+            var input = /** @type {HTMLInputElement} */(
+                document.getElementById('pac-input'));
+            map.controls[google.maps.ControlPosition.TOP_LEFT].push(input);
+
+            var searchBox = new google.maps.places.SearchBox(
+              /** @type {HTMLInputElement} */(input));
+
+            // [START region_getplaces]
+            // Listen for the event fired when the user selects an item from the
+            // pick list. Retrieve the matching places for that item.
+            google.maps.event.addListener(searchBox, 'places_changed', function () {
+                var places = searchBox.getPlaces();
+
+                for (var i = 0, marker; marker = markers[i]; i++) {
+                    marker.setMap(null);
+                }
+
+                // For each place, get the icon, place name, and location.
+                markers = [];
+                var bounds = new google.maps.LatLngBounds();
+                for (var i = 0, place; place = places[i]; i++) {
+                    var image = {
+                        url: place.icon,
+                        size: new google.maps.Size(71, 71),
+                        origin: new google.maps.Point(0, 0),
+                        anchor: new google.maps.Point(17, 34),
+                        scaledSize: new google.maps.Size(25, 25)
+                    };
+
+                    // Create a marker for each place.
+                    var marker = new google.maps.Marker({
+                        map: map,
+                        icon: image,
+                        title: place.name,
+                        position: place.geometry.location
+                    });
+
+                    markers.push(marker);
+
+                    bounds.extend(place.geometry.location);
+                }
+
+                map.fitBounds(bounds);
+            });
+            // [END region_getplaces]
+
+            // Bias the SearchBox results towards places that are within the bounds of the
+            // current map's viewport.
+            google.maps.event.addListener(map, 'bounds_changed', function () {
+                var bounds = map.getBounds();
+                searchBox.setBounds(bounds);
+            });
+        }
+
+
+
+        google.maps.event.addDomListener(window, 'load', initialize);
+
+    </script>
+    <style>
+      #target {
+        width: 345px;
+      }
+    </style>
+  </head>
+  <body>
+    <input id="pac-input" class="controls" type="text" placeholder="Search Box">
+    <div id="map-canvas"></div>
+  </body>
+</html>
