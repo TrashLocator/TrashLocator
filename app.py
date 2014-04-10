@@ -20,9 +20,13 @@ def index():
 @app.route("/map", methods=['GET','POST'])
 def map(): 
     return render_template("map.html")
+
+@app.route("/heat", methods=['GET','POST'])
+def heat(): 
+    return render_template("heatmap.html")
     
 
 if __name__=="__main__":
     app.debug=True
-    app.run(host='0.0.0.0',port=5001)
+    app.run(host='0.0.0.0',port=5000)
     
