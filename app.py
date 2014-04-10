@@ -17,11 +17,12 @@ def index():
             loc=request.form['location'].encode("utf8")
             lev=request.form['trash'].encode("utf8")
             
-@app.route("/input", methods=['GET','POST'])
-def input(): 
-    return render_template("input.html")
+@app.route("/map", methods=['GET','POST'])
+def map(): 
+    return render_template("map.html")
     
+
 if __name__=="__main__":
     app.debug=True
-    app.run(host='0.0.0.0',port=5000)
+    app.run(host='0.0.0.0',port=5001)
     
