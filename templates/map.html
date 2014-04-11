@@ -244,8 +244,21 @@
                 '</div>' +
                 '</div>';
 
+                var contentString2 = '<div align="center" id="content">' +
+                   '<div id="siteNotice">' +
+                   '</div>' +
+                   '<h1 style = "text-align:center"> Report Trash </h1>' +
+                   '<p>Below is a sample report posted via Twitter. Please describe the situation in the body of the tweet. Then follow with the hashtag <b>#TrashPickupNYC #(Your Neighborhood) #(Optional: Street Intersection)</b>. You may also upload a photo onto the tweet.<p>'+
+                   '<blockquote class="twitter-tweet" lang="en"><p>Clean up here please. <a href="https://twitter.com/search?q=%23TrashPickupNYC&amp;src=hash">#TrashPickupNYC</a>' +
+                   '<a href="https://twitter.com/search?q=%23Tribeca&amp;src=hash">#Tribeca</a> <a href="https://twitter.com/search?q=%23345Chambers&amp;src=hash">#345Chambers</a>' +
+                   '<a href="http://t.co/wpItU9vf7v">pic.twitter.com/wpItU9vf7v</a></p>&mdash; NYC Trash Locator (@NYCTrashLocator) <a href="https://twitter.com/NYCTrashLocator/statuses/454624168605007872">April 11, 2014</a></blockquote>' +
+                   '<br>' +
+                   '<a href="https://twitter.com/intent/tweet?button_hashtag=TrashPickupNYC" class="twitter-hashtag-button" data-size="large">Tweet #TrashPickupNYC</a>' +
+                   '</div>' +
+                   '</div>';
+
             var infowindow = new google.maps.InfoWindow({
-                content: contentString
+                content: contentString2
             });
 
             google.maps.event.addListener(marker, 'click', function () {
@@ -253,6 +266,17 @@
                 geocodePosition(marker.getPosition());
             });
 
+            google.maps.event.addListener(infowindow, 'domready', function () {
+                ! function (d, s, id) {
+                    var js, fjs = d.getElementsByTagName(s)[0];
+                    if (!d.getElementById(id)) {
+                        js = d.createElement(s);
+                        js.id = id;
+                        js.src = "//platform.twitter.com/widgets.js";
+                        fjs.parentNode.insertBefore(js, fjs);
+                    }
+                }(document, "script", "twitter-wjs");
+            });
 
             google.maps.event.addListener(marker, 'dragstart', function () {
                 updateMarkerAddress('Dragging...');
