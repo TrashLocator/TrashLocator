@@ -55,6 +55,7 @@
 }
 
     </style>
+    <script type="text/javascript" src="https://apis.google.com/js/plusone.js"></script>
     <title>Places search box</title>
     <script src="https://maps.googleapis.com/maps/api/js?v=3.exp&sensor=false&libraries=places"></script>
     <script>
@@ -262,13 +263,24 @@
                 '</div>' +
                 '<h1 style = "text-align:center"> Report Trash </h1>' +
                 '<p>Below is a sample report posted via Facebook. Please describe the situation in the body of the post. Then follow with the hashtag <b>#TrashPickupNYC #(Your Neighborhood) #(Optional: Street Intersection)</b>. You may also upload a photo along with the post.<p>' +
-                '<a data-href="https://www.facebook.com/photo.php?fbid=1374286702855385&amp;amp" data-width="500"></a>' +
+                '<div class="fb-post" data-href="https://www.facebook.com/permalink.php?story_fbid=1374286732855382&amp;id=100008222040193&amp;substory_index=0" data-width="466"><div class="fb-xfbml-parse-ignore"><a href="https://www.facebook.com/permalink.php?story_fbid=1374286732855382&amp;id=100008222040193&amp;substory_index=0">Post</a> by <a href="https://www.facebook.com/profile.php?id=100008222040193">Trash Locator</a>.</div></div>' +
                 '<p> hi</p>'+
                 '</div>' +
                 '</div>';
 
+            var contentString4 = '<div align="center" id="content">' +
+                '<div id="siteNotice">' +
+                '</div>' +
+                '<h1 style = "text-align:center"> Report Trash </h1>' +
+                '<p>Below is a sample report posted via Google+. Please describe the situation in the body of the post. Then follow with the hashtag <b>#TrashPickupNYC #(Your Neighborhood) #(Optional: Street Intersection)</b>. You may also upload a photo along with the post.<p>' +
+                '<div class="g-post" data-href="https://plus.google.com/107309753046337293392/posts/Jq4LRxDcuJi"></div>' +
+                '<p> hi</p>'+
+                '</div>' +
+                '</div>';
+
+
             var infowindow = new google.maps.InfoWindow({
-                content: contentString2
+                content: contentString4
             });
 
             google.maps.event.addListener(marker, 'click', function () {
