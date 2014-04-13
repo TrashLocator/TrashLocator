@@ -1,0 +1,129 @@
+body,
+        html {
+            height: 100%;
+            width: 100%;
+            margin: 0;
+        }
+        div.wrapper {
+            /* Outer infowindow size */
+            width: 317px;
+            height: 280px;
+            margin: 6px;
+            display: none;
+        }
+        div.tabs {
+            /* Tabs container */
+            position: relative;
+            bottom: 35px;
+            left: -18px;
+            /*  height: 2px; */
+            display: table;
+        }
+        span.activeTab,
+        span.passiveTab,
+        span.hoverTab {
+            float: left;
+            height: 19px;
+            border-top: 1px solid #8fA7cc;
+            border-right: 1px solid #8fA7cc;
+            border-left: 1px solid #8fA7cc;
+            /* Default inner spaces for all tabs */
+            padding: 1px 7px;
+            /* Rounded corners for all tabs */
+            -moz-border-radius-topleft: 8px;
+            -moz-border-radius-topright: 8px;
+            -webkit-border-top-left-radius: 8px;
+            -webkit-border-top-right-radius: 8px;
+            border-top-left-radius: 8px;
+            border-top-right-radius: 8px;
+            /* Adjust box-shadow of tabs to infowindow */
+            box-shadow: -2px -2px 2px rgba(0, 0, 0, 0.05);
+            /* Avoid selecting text on tab click */
+            -webkit-user-select: none;
+            -moz-user-select: none;
+            -ms-user-select: none;
+        }
+        span.activeTab {
+            /* Increase height of active tab */
+            position: relative;
+            bottom: 2px;
+            height: 20px;
+            padding-top: 3px;
+            font-weight: bold !important;
+            color: #5D5CA0;
+            background-color: #FFF;
+        }
+        *span.activeTab {
+            /* IE fix */
+            zoom: 1;
+        }
+        iframe#myvideo {
+            width: 317px !important;
+            height: 225px !important;
+            display: inherit;
+        }
+        span.passiveTab {
+            cursor: default;
+            color: #006;
+            background-color: #E9E9E9;
+        }
+        span.hoverTab {
+            cursor: pointer;
+            color: #5676EA;
+            background-color: #DCDCDC;
+        }
+        div.cardContent {
+            /* Inner infowindow size */
+            position: relative;
+            top: -18px;
+            width: 317px;
+            height: 229px;
+            padding: 4px 5px 0 0;
+            overflow-y: auto;
+            display: none;
+        }
+        .controls {
+            margin-top: 16px;
+            border: 1px solid transparent;
+            border-radius: 2px 0 0 2px;
+            box-sizing: border-box;
+            -moz-box-sizing: border-box;
+            height: 32px;
+            outline: none;
+            box-shadow: 0 2px 6px rgba(0, 0, 0, 0.3);
+        }
+        #pac-input {
+            background-color: #fff;
+            padding: 0 11px 0 13px;
+            width: 400px;
+            font-family: Roboto;
+            font-size: 15px;
+            font-weight: 300;
+            text-overflow: ellipsis;
+        }
+        #pac-input:focus {
+            border-color: #4d90fe;
+            margin-left: -1px;
+            padding-left: 14px;
+            /* Regular padding-left + 1. */
+            width: 401px;
+        }
+        .pac-container {
+            font-family: Roboto;
+        }
+        #type-selector {
+            color: #fff;
+            background-color: #4d90fe;
+            padding: 5px 11px 0px 11px;
+        }
+        #target {
+            width: 345px;
+        }
+        #type-selector label {
+            font-family: Roboto;
+            font-size: 13px;
+            font-weight: 300;
+            b {
+                /* Use !important to overwrite API injections in infowindows */
+                font-weight: bold !important;
+            }
