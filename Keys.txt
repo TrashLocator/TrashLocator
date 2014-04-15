@@ -1,3 +1,7 @@
 Twitter:
 API Keys 	xVTR2YjyCOlrORlEA6fBZpmwq
 API secret	FBZTmKs4Dnzb89gZg66lK9Esy0LXRcV7BesbxyA7DtWdGiC1uH
+
+Facebook:
+App ID: 1480960222115875
+Secret: 80fa571f2ec8c32960c9bf079c2ca3be
