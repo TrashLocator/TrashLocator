@@ -89,11 +89,6 @@ var geocoder = new google.maps.Geocoder();
                         d.handleTabs(a);
                         if (a == 5) viewStreet(d.card, d.point);
                         else if (b == "Mini Map") seeMiniMap(d.card, d.point);
-                        else if (b == "Video") showVideo(d.card);
-                        if (a != 6) {
-                            if (msie) removeVideo();
-                            else if (player) player.pauseVideo()
-                        }
                         return false
                     }
                 }
@@ -112,7 +107,7 @@ var geocoder = new google.maps.Geocoder();
             var g = google.maps;
             var c = new g.Map(document.getElementById(a), {
                 center: b,
-                zoom: 18,
+                zoom: 17,
                 streetViewControl: false,
                 mapTypeId: "hybrid",
                 mapTypeControlOptions: {
@@ -125,12 +120,13 @@ var geocoder = new google.maps.Geocoder();
 
         function createMarker(position, b) {
             var marker = new google.maps.Marker({
-                position: position,
+                //position: position,
                 map: map,
                 clickable: true,
                 draggable: true
             });
             markers.push(marker);
+            console.log(markers);
             google.maps.event.addListener(marker, "click", function () {
                 infowindow.setContent(b);
                 b.style.display = "block";
@@ -148,6 +144,8 @@ var geocoder = new google.maps.Geocoder();
         }
 
         function buildMap() {
+
+            //min and max Zoom levels for map
             var minZoomLevel = 11;
             var maxZoomLevel = 17;
 
@@ -186,6 +184,7 @@ var geocoder = new google.maps.Geocoder();
 
                 map.setCenter(new google.maps.LatLng(y, x));
             });
+            placeMarker(map.getCenter());
 
             google.maps.event.addListener(map, 'zoom_changed', function () {
                 if (map.getZoom() < minZoomLevel) map.setZoom(minZoomLevel);
@@ -193,8 +192,7 @@ var geocoder = new google.maps.Geocoder();
             });
 
             google.maps.event.addListener(map, 'click', function (e) {
-                deleteMarkers();
-                placeMarker(e.latLng);
+                markers[0].setPosition(e.latLng)
             });
 
             // Create the search box and link it to the UI element.
@@ -213,19 +211,20 @@ var geocoder = new google.maps.Geocoder();
             google.maps.event.addListener(searchBox, 'places_changed', function () {
                 var places = searchBox.getPlaces();
 
-                for (var i = 0, marker; marker = markers[i]; i++) {
-                    marker.setMap(null);
-                }
+                //for (var i = 0, marker; marker = markers[i]; i++) {
+                //    marker.setMap(null);
+                //}
 
                 // For each place, get the icon, place name, and location.
-                markers = [];
+                //markers = [];
                 var bounds = new google.maps.LatLngBounds();
                 //for (var i = 0, place; place = places[i]; i++) {
                 //places only first location in queue
                 place = places[0]
 
                 //calls placeMarker to place marker
-                placeMarker(place.geometry.location)
+                //placeMarker(place.geometry.location)
+                markers[0].setPosition(place.geometry.location)
 
                 //adjusts window
                 bounds.extend(place.geometry.location);
@@ -248,11 +247,12 @@ var geocoder = new google.maps.Geocoder();
 
         }
 
+        //Places marker in given position (used only at init or to place new marker)
         function placeMarker(position) {
             infowindow = new google.maps.InfoWindow();
-            var d = document.getElementById("wrapper1");
+            var wrapper = document.getElementById("wrapper1");
             var e = new TabCard("firstTabs", "firstCard", position);
-            var f = createMarker(position, d);
+            var f = createMarker(position, wrapper);
         }
 
         function setAllMap(map) {
@@ -266,10 +266,10 @@ var geocoder = new google.maps.Geocoder();
             setAllMap(null);
         }
 
-         // Deletes all markers in the array by removing references to them.
+         // Sets the position of marker 0 to null, removing it from the map.
         function deleteMarkers() {
-            clearMarkers();
-            markers = [];
+            infowindow.close()
+            markers[0].setPosition(null)
         }
 
         window.onload = buildMap;
