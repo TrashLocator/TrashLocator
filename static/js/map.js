@@ -44,10 +44,25 @@ var geocoder = new google.maps.Geocoder();
 
             // Will call place marker to place marker at geolocation
             google.maps.event.addDomListener(controlUI, 'click', function () {
-
+                getUsersLocation();
             });
 
         }
+
+        function getUsersLocation() {
+        if (navigator.geolocation) {
+          navigator.geolocation.getCurrentPosition(function(position) {
+            var pos = new google.maps.LatLng(position.coords.latitude,
+              position.coords.longitude);
+            markers[0].setPosition(pos);
+            console.log(pos)
+          }, function() {
+            markers[0].setPosition(new google.maps.LatLng(14.597466, 121.0092));
+          });
+        } else {
+          markers[0].setPosition(new google.maps.LatLng(14.597466, 121.0092));
+        }
+      }
 
 
         var map, infowindow, player;
