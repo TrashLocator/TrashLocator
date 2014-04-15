@@ -1,0 +1,142 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="initial-scale=1.0, user-scalable=no" />
+    <title>TrashLocator</title>
+    <link rel="stylesheet" type="text/css" href={{ url_for('static', filename='css/map.css') }}>
+    <script src="https://maps.googleapis.com/maps/api/js?v=3.exp&sensor=false&libraries=places"></script>
+    <script src={{ url_for('static', filename='js/map.js') }}></script>
+</head>
+
+<body>
+    <input id="pac-input" class="controls" type="text" placeholder="Search Box">
+    <div id="map" style="width: 100%; height: 100%;"></div>
+    <!-- Tabs of first marker -->
+    <div id="wrapper1" class="wrapper">
+        <div id="firstTabs" class="tabs">
+            <span data-name="1">TrashLocator</span>
+
+            <span data-name="2">Twitter</span>
+
+            <span data-name="3">Facebook</span>
+
+            <span data-name="4">Google+</span>
+
+            <span data-name="5">Street View</span>
+
+            <span data-name="6">Mini Map</span>
+
+        </div>
+        <div id="firstCard1" class="cardContent">
+            <!-- Content of first tab card -->
+            <div id="content">
+                <div id="siteNotice"></div>
+
+                <h1 style="text-align:center"> Report Trash </h1>
+
+                <form method="POST" align="center">
+                    <b>Closest matching address:</b>
+
+                    <div id="address"></div>
+                    <p>Email Address:
+                        <input type="text" name="email" value="">
+                    </p>
+                    <p>Severity of trash: 0
+                        <input type="range" name="trash" min="1" max="10">10</p>
+                    <p>Attach a photo:
+                        <input type="file" name="photo" allow="image/*">
+                        <p>
+                            <p>
+                                <input type="submit" name="button" value="Submit">
+                                <input onclick="deleteMarkers();" type=button value="Delete Markers">
+                            </p>
+                            <br>
+                </form>
+            </div>
+        </div>
+        <div id="firstCard2" class="cardContent">
+            <div align="center" id="Div1">
+                <div id="Div2"></div>
+
+                <h1 style="text-align:center"> Report Trash </h1>
+                    <b>Closest matching address:</b>
+
+                    <div id="address2"></div>
+
+                <p>Below is a sample report posted via Twitter. Please describe the situation in the body of the tweet. Then follow with the hashtag <b>#TrashPickupNYC #(Your Neighborhood) #(Optional: Street Intersection)</b>. You may also upload a photo
+                    onto the tweet.</p>
+                <blockquote class="twitter-tweet" lang="en">
+                    <p>Clean up here please. <a href="https://twitter.com/search?q=%23TrashPickupNYC&amp;src=hash">#TrashPickupNYC</a>
+
+                        <a href="https://twitter.com/search?q=%23Tribeca&amp;src=hash">#Tribeca</a>  <a href="https://twitter.com/search?q=%23345Chambers&amp;src=hash">#345Chambers</a>
+
+                        <a href="http://t.co/wpItU9vf7v">pic.twitter.com/wpItU9vf7v</a>
+
+                    </p>&mdash; NYC Trash Locator (@NYCTrashLocator) <a href="https://twitter.com/NYCTrashLocator/statuses/454624168605007872">April 11, 2014</a>
+
+                </blockquote>
+                <script async src="//platform.twitter.com/widgets.js" charset="utf-8"></script>
+                <br>
+                <a href="https://twitter.com/intent/tweet?button_hashtag=TrashPickupNYC" class="twitter-hashtag-button" data-size="large">Tweet #TrashPickupNYC</a>
+
+            </div>
+        </div>
+        <div id="firstCard3" class="cardContent">
+            <div id="Div10" align = "center">
+
+            <h1 style="text-align:center"> Report Trash </h1>
+
+            <b>Closest matching address:</b>
+
+            <div id="address3"></div>
+
+            <div id="Div11"></div>
+            <p>Below is a sample report posted via Facebook. Please describe the situation in the body of the post. Then follow with the hashtag <b>#TrashPickupNYC #(Your Neighborhood) #(Optional: Street Intersection)</b>. You may also upload a photo along
+                with the post.
+                <p>
+                    <div id="fb-root"></div>
+                    <script>
+                        (function (d, s, id) {
+                            var js, fjs = d.getElementsByTagName(s)[0];
+                            if (d.getElementById(id)) return;
+                            js = d.createElement(s);
+                            js.id = id;
+                            js.src = "//connect.facebook.net/en_US/all.js#xfbml=1";
+                            fjs.parentNode.insertBefore(js, fjs);
+                        }(document, 'script', 'facebook-jssdk'));
+                    </script>
+                    <div class="fb-post" data-href="https://www.facebook.com/photo.php?fbid=1374286702855385&amp;set=a.1374286729522049.1073741827.100008222040193&amp;type=1" data-width="466">
+                        <div class="fb-xfbml-parse-ignore"><a href="https://www.facebook.com/photo.php?fbid=1374286702855385&amp;set=a.1374286729522049.1073741827.100008222040193&amp;type=1">Post</a> by <a href="https://www.facebook.com/profile.php?id=100008222040193">Trash Locator</a>.</div>
+                    </div>
+                    <p>hi</p>
+                    </div>
+        </div>
+        <div id="firstCard4" class="cardContent">
+            <div align="center" id="Div13">
+                <div id="Div14"></div>
+
+                <h1 style="text-align:center"> Report Trash </h1>
+                <b>Closest matching address:</b>
+
+                <div id="address4"></div>
+
+                <p>Below is a sample report posted via Google+. Please describe the situation in the body of the post. Then follow with the hashtag <b>#TrashPickupNYC #(Your Neighborhood) #(Optional: Street Intersection)</b>. You may also upload a photo along
+                    with the post.
+                    <p>
+                        <div class="g-post" data-href="https://plus.google.com/107309753046337293392/posts/Jq4LRxDcuJi"></div>
+                        <p>hi</p>
+            </div>
+        </div>
+        <div id="firstCard5" class="cardContent">
+            <!-- Street View -->
+        </div>
+        <div id="firstCard6" class="cardContent">
+            <!-- MiniMap -->
+        </div>
+    </div>
+    <script type="text/javascript" src="https://apis.google.com/js/plusone.js"></script>
+</body>
+
+</html>
