@@ -54,13 +54,13 @@ var geocoder = new google.maps.Geocoder();
           navigator.geolocation.getCurrentPosition(function(position) {
             var pos = new google.maps.LatLng(position.coords.latitude,
               position.coords.longitude);
-            markers[0].setPosition(pos);
+            mainmarker.setPosition(pos);
             console.log(pos)
           }, function() {
-            markers[0].setPosition(new google.maps.LatLng(14.597466, 121.0092));
+            mainmarker.setPosition(new google.maps.LatLng(14.597466, 121.0092));
           });
         } else {
-          markers[0].setPosition(new google.maps.LatLng(14.597466, 121.0092));
+          mainmarker.setPosition(new google.maps.LatLng(14.597466, 121.0092));
         }
       }
 
@@ -113,7 +113,7 @@ var geocoder = new google.maps.Geocoder();
         function viewStreet(a, b) {
             var g = google.maps;
             var c = new g.StreetViewPanorama(document.getElementById(a), {
-                position: b
+                position: mainmarker.getPosition()
             });
             c.setVisible(true)
         }
@@ -121,7 +121,7 @@ var geocoder = new google.maps.Geocoder();
         function seeMiniMap(a, b) {
             var g = google.maps;
             var c = new g.Map(document.getElementById(a), {
-                center: b,
+                center: mainmarker.getPosition(),
                 zoom: 17,
                 streetViewControl: false,
                 mapTypeId: "hybrid",
@@ -132,6 +132,7 @@ var geocoder = new google.maps.Geocoder();
         }
 
         var markers = [];
+        var mainmarker = null;
 
         function createMarker(position, b) {
             var marker = new google.maps.Marker({
@@ -140,8 +141,9 @@ var geocoder = new google.maps.Geocoder();
                 clickable: true,
                 draggable: true
             });
-            markers.push(marker);
-            console.log(markers);
+            //markers.push(marker);
+            mainmarker = marker;
+            console.log(mainmarker);
             google.maps.event.addListener(marker, "click", function () {
                 infowindow.setContent(b);
                 b.style.display = "block";
@@ -156,6 +158,37 @@ var geocoder = new google.maps.Geocoder();
                 geocodePosition(marker.getPosition());
             });
             return marker
+        }
+
+        function addHistoryMarker(position){
+            deleteMarkers()
+            var marker = new google.maps.Marker({
+                map:map,
+                position:position,
+                clickable:true,
+                draggable:false,
+                icon:'https://lh3.googleusercontent.com/-H5iwqSQvpq4/U1hsUZ_yzfI/AAAAAAAAACo/ggP69uLczMc/s45-no/Untitled-1.png'
+            })
+            markers.push(marker)
+
+            geocoder.geocode({'latLng': position}, function(results, status) {
+    if (status == google.maps.GeocoderStatus.OK) {
+      if (results[0]) {
+        map.setZoom(11);
+        infowindow.setContent('<div id="content" align="center">'+ '<div id="siteNotice">'+ '</div>'
+            + '<h1 id="firstHeading" class="firstHeading">Thank you for your submission</h1>'
+            + '<div id="bodyContent">'+ '<p>You placed a request at ' + results[0].formatted_address 
+            + '.</p>'+ '</div>'+ '</div>');
+        google.maps.event.addListener(marker, 'click', function() {
+                infowindow.open(map,marker);
+            });
+      } else {
+        alert('No results found');
+      }
+    } else {
+      alert('Geocoder failed due to: ' + status);
+    }
+  });
         }
 
         function buildMap() {
@@ -207,7 +240,7 @@ var geocoder = new google.maps.Geocoder();
             });
 
             google.maps.event.addListener(map, 'click', function (e) {
-                markers[0].setPosition(e.latLng)
+                mainmarker.setPosition(e.latLng)
             });
 
             // Create the search box and link it to the UI element.
@@ -239,7 +272,7 @@ var geocoder = new google.maps.Geocoder();
 
                 //calls placeMarker to place marker
                 //placeMarker(place.geometry.location)
-                markers[0].setPosition(place.geometry.location)
+                mainmarker.setPosition(place.geometry.location)
 
                 //adjusts window
                 bounds.extend(place.geometry.location);
@@ -284,7 +317,7 @@ var geocoder = new google.maps.Geocoder();
          // Sets the position of marker 0 to null, removing it from the map.
         function deleteMarkers() {
             infowindow.close()
-            markers[0].setPosition(null)
+            mainmarker.setPosition(null)
         }
 
         window.onload = buildMap;
