@@ -8,6 +8,7 @@
     <link rel="stylesheet" type="text/css" href={{ url_for('static', filename='css/map.css') }}>
     <script src="https://maps.googleapis.com/maps/api/js?v=3.exp&sensor=false&libraries=places"></script>
     <script src={{ url_for('static', filename='js/map.js') }}></script>
+    <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.11.0/jquery.min.js"></script>
 </head>
 
 <body>
@@ -36,7 +37,7 @@
 
                 <h1 style="text-align:center"> Report Trash </h1>
 
-                <form method="POST" align="center">
+                <form method="POST" align="center" id="reportForm">
                     <b>Closest matching address:</b>
 
                     <div id="address"></div>
@@ -54,8 +55,15 @@
                             </p>
                             <br>
                 </form>
+
             </div>
         </div>
+        <script>
+                $('#reportForm').submit(function () {
+                    addHistoryMarker(mainmarker.getPosition());
+                    return false;
+                })
+                </script>
         <div id="firstCard2" class="cardContent">
             <div align="center" id="Div1">
                 <div id="Div2"></div>

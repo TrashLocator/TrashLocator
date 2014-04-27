@@ -162,6 +162,7 @@ var geocoder = new google.maps.Geocoder();
 
         function addHistoryMarker(position){
             deleteMarkers()
+            var confirmwindow = new google.maps.InfoWindow();
             var marker = new google.maps.Marker({
                 map:map,
                 position:position,
@@ -175,12 +176,13 @@ var geocoder = new google.maps.Geocoder();
     if (status == google.maps.GeocoderStatus.OK) {
       if (results[0]) {
         map.setZoom(11);
-        infowindow.setContent('<div id="content" align="center">'+ '<div id="siteNotice">'+ '</div>'
+        confirmwindow.setContent('<div id="content" align="center">'+ '<div id="siteNotice">'+ '</div>'
             + '<h1 id="firstHeading" class="firstHeading">Thank you for your submission</h1>'
             + '<div id="bodyContent">'+ '<p>You placed a request at ' + results[0].formatted_address 
             + '.</p>'+ '</div>'+ '</div>');
+        confirmwindow.open(map,marker);
         google.maps.event.addListener(marker, 'click', function() {
-                infowindow.open(map,marker);
+                confirmwindow.open(map,marker);
             });
       } else {
         alert('No results found');
@@ -190,6 +192,11 @@ var geocoder = new google.maps.Geocoder();
     }
   });
         }
+/*
+        $('#reportForm').submit(function () {
+ addHistoryMarker(mainmarker.getPosition());
+ return false;
+});*/
 
         function buildMap() {
 
