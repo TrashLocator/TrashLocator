@@ -44,6 +44,8 @@ body {
 a:hover {
   cursor: pointer; }
 
+
+
 img,
 object,
 embed {
@@ -56,6 +58,8 @@ embed {
 
 img {
   -ms-interpolation-mode: bicubic; }
+
+
 
 #map_canvas img,
 #map_canvas embed,
@@ -78,6 +82,8 @@ img {
     display: table; }
   .clearfix:after {
     clear: both; }
+
+#map img{max-width: inherit;}
 
 .text-left {
   text-align: left !important; }
@@ -1140,17 +1146,17 @@ meta.foundation-mq-topbar {
     .fixed.expanded:not(.top-bar) .title-area {
       position: fixed;
       width: 100%;
-      z-index: 99; }
+      z-index: 100; }
     .fixed.expanded:not(.top-bar) .top-bar-section {
       z-index: 98;
       margin-top: 45px; }
 
 .top-bar {
   overflow: hidden;
-  height: 110px;
+  height: 45px;
   line-height: 45px;
   position: relative;
-  background: aqua;
+  background: #171734;
   margin-bottom: 0; }
   .top-bar ul {
     margin-bottom: 0;
@@ -1227,9 +1233,9 @@ meta.foundation-mq-topbar {
     height: auto;
     background: transparent; }
     .top-bar.expanded .title-area {
-      background: aqua; }
+      background: #171734; }
     .top-bar.expanded .toggle-topbar a {
-      color: aqua; }
+      color: #171734; }
       .top-bar.expanded .toggle-topbar a span {
         -webkit-box-shadow: 0 10px 0 1px #888888, 0 16px 0 1px #888888, 0 22px 0 1px #888888;
         box-shadow: 0 10px 0 1px #888888, 0 16px 0 1px #888888, 0 22px 0 1px #888888; }
@@ -1245,7 +1251,7 @@ meta.foundation-mq-topbar {
     width: 100%;
     height: auto;
     display: block;
-    background: aqua;
+    background: #171734;
     font-size: 16px;
     margin: 0; }
   .top-bar-section .divider,
@@ -1260,10 +1266,10 @@ meta.foundation-mq-topbar {
     color: #FFD700;
     padding: 12px 0 12px 0;
     padding-left: 15px;
-    font-family: "Helvetica Neue", "Helvetica", Helvetica, Arial, sans-serif;
+    font-family: 'Source Sans Pro', sans-serif;
     font-size: 0.8125rem;
     font-weight: normal;
-    background: aqua; }
+    background: #171734; }
     .top-bar-section ul li > a.button {
       background: #008cba;
       font-size: 0.8125rem;
@@ -1349,7 +1355,7 @@ meta.foundation-mq-topbar {
 
 @media only screen and (min-width: 40.063em) {
   .top-bar {
-    background: aqua;
+    background: #171734;
     *zoom: 1;
     overflow: visible; }
     .top-bar:before, .top-bar:after {
@@ -1369,7 +1375,7 @@ meta.foundation-mq-topbar {
       position: relative;
       top: 7px; }
     .top-bar.expanded {
-      background: aqua; }
+      background: #171734; }
 
   .contain-to-grid .top-bar {
     max-width: 62.5rem;
@@ -1395,7 +1401,7 @@ meta.foundation-mq-topbar {
     .top-bar-section li:not(.has-form) a:not(.button) {
       padding: 0 15px;
       line-height: 45px;
-      background: aqua; }
+      background: #171734; }
       .top-bar-section li:not(.has-form) a:not(.button):hover {
         background: #CCFF33; }
     .top-bar-section .has-dropdown > a {
@@ -1436,7 +1442,7 @@ meta.foundation-mq-topbar {
         background: #CCFF33; }
       .top-bar-section .dropdown li label {
         white-space: nowrap;
-        background: aqua; }
+        background: #171734; }
       .top-bar-section .dropdown li .dropdown {
         left: 100%;
         top: 0; }
@@ -1448,7 +1454,7 @@ meta.foundation-mq-topbar {
       height: 45px;
       width: 0; }
     .top-bar-section .has-form {
-      background: aqua;
+      background: #171734;
       padding: 0 15px;
       height: 45px; }
     .top-bar-section .right li .dropdown {
@@ -2608,7 +2614,7 @@ ul.pagination {
     .accordion .content.active {
       display: block;
       background: white; }
-
+/
 /* Typography resets */
 div,
 dl,
@@ -2617,22 +2623,12 @@ dd,
 ul,
 ol,
 li,
-h1,
-h2,
-h3,
-h4,
-h5,
-h6,
-pre,
-form,
-p,
-blockquote,
 th,
 td {
   margin: 0;
   padding: 0; }
 
-/* Default Link Styles */
+/*Default Link Styles */
 a {
   color: #008cba;
   text-decoration: none;
@@ -2642,7 +2638,7 @@ a {
   a img {
     border: none; }
 
-/* Default paragraph styles */
+/* Default paragraph styles 
 p {
   font-family: inherit;
   font-weight: normal;
@@ -2657,8 +2653,8 @@ p {
     font-size: 0.875rem;
     line-height: 1.35;
     font-style: italic; }
-
-/* Default header styles */
+*/
+/* Default header styles 
 h1, h2, h3, h4, h5, h6 {
   font-family: "Helvetica Neue", "Helvetica", Helvetica, Arial, sans-serif;
   font-weight: 300;
@@ -2703,7 +2699,7 @@ hr {
   border-width: 1px 0 0;
   clear: both;
   margin: 1.25rem 0 1.1875rem;
-  height: 0; }
+  height: 0; }*/
 
 /* Helpful Typography Defaults */
 em,
@@ -3924,11 +3920,11 @@ table {
     display: table-cell;
     line-height: 1.125rem; }
 
-/* Standard Forms */
+/* Standard Forms 
 form {
   margin: 0 0 1rem; }
-
-/* Using forms within rows, we need to set some defaults */
+*/
+/* Using forms within rows, we need to set some defaults 
 form .row .row {
   margin: 0 -0.5rem; }
   form .row .row .column,
@@ -3949,7 +3945,7 @@ form .row input.columns,
 form .row textarea.column,
 form .row textarea.columns {
   padding-left: 0.5rem; }
-
+*/
 /* Label Styles */
 label {
   font-size: 0.875rem;

@@ -3,8 +3,9 @@
 
 <head>
     <meta charset="utf-8" />
-    <meta name="viewport" content="initial-scale=1.0, user-scalable=no" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
     <title>TrashLocator</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/foundation.css') }}" />
     <link rel="stylesheet" type="text/css" href={{ url_for('static', filename='css/map.css') }}>
     <script src="https://maps.googleapis.com/maps/api/js?v=3.exp&sensor=false&libraries=places"></script>
     <script src={{ url_for('static', filename='js/map.js') }}></script>
@@ -12,8 +13,85 @@
 </head>
 
 <body>
-    <input id="pac-input" class="controls" type="text" placeholder="Search Box">
-    <div id="map" style="width: 100%; height: 100%;"></div>
+<link href='http://fonts.googleapis.com/css?family=Source+Sans+Pro:600' rel='stylesheet' type='text/css'>
+    <!--________________________________________________________________________-->
+    
+      <!-- Header and Nav -->
+  <nav class="top-bar" data-topbar>
+    <ul class="title-area">
+      <!-- Title Area -->
+      <li class="name">
+        <h1>
+          <a href="/">
+<img src="{{ url_for('static', filename='img/trashlogo.jpg') }}" width ='165' height = '45' style="padding-bottom: 2px;" />            
+          </a>
+        </h1>
+      </li>
+      <li class="toggle-topbar menu-icon"><a href="#"><span>Menu</span></a></li>
+    </ul>
+ 
+    <section class="top-bar-section">
+
+    <ul class="left">
+        <li class="divider"></li>
+        <li><a href="#">TrashLocator</a></li>
+        <li class="divider"></li>
+        <li><a href="#">ABOUT</a></li>
+        <li class="divider"></li>
+        <li class="has-dropdown">
+          <a href="#">RESOURCES</a>
+          <ul class="dropdown">
+            <li><label>Section Name</label></li>
+            <li class="has-dropdown">
+              <a href="#" class="">Has Dropdown, Level 1</a>
+              <ul class="dropdown">
+                <li><a href="#">Dropdown Options</a></li>
+                <li><a href="#">Dropdown Options</a></li>
+                <li class="has-dropdown">
+                  <a href="#">Has Dropdown, Level 2</a>
+                  <ul class="dropdown test">
+                    <li><a href="#">Subdropdown Option</a></li>
+                    <li><a href="#">Subdropdown Option</a></li>
+                    <li><a href="#">Subdropdown Option</a></li>
+                  </ul>
+                </li>
+                <li><a href="#">Subdropdown Option</a></li>
+                <li><a href="#">Subdropdown Option</a></li>
+                <li><a href="#">Subdropdown Option</a></li>
+              </ul>
+            </li>
+            <li><a href="#">Dropdown Option</a></li>
+            <li><a href="#">Dropdown Option</a></li>
+            <li class="divider"></li>
+            <li><label>Section Name</label></li>
+            <li><a href="#">Dropdown Option</a></li>
+            <li><a href="#">Dropdown Option</a></li>
+            <li><a href="#">Dropdown Option</a></li>
+            <li class="divider"></li>
+            <li><a href="#">See all →</a></li>
+          </ul>
+        </li>
+    </ul>  
+
+ 
+      <!-- Right Nav Section -->
+      <ul class="right">
+        <li><a class="padding" href="#" target="_blank"></a></li>
+        <li class="divider"></li>
+        <li class="has-dropdown">
+          <a href="#">CONNECT</a>
+          <ul class="dropdown">
+            <li><a href="#">Login With Facebook</a></li>
+            <li><a href="#">Login With Twitter</a></li>
+            <li><a href="#">Login With Google</a></li>
+            <li><a href="#">Use Your Email</a></li>
+          </ul>
+        </li>
+      </ul>
+    </section>
+  </nav>
+    <input id="pac-input" class="controls" type="text" placeholder="Search Box" style="top:20px">
+    <div id="map" style="width: 100%; height: 95.135%;"></div>
     <!-- Tabs of first marker -->
     <div id="wrapper1" class="wrapper">
         <div id="firstTabs" class="tabs">
@@ -41,13 +119,18 @@
                     <b>Closest matching address:</b>
 
                     <div id="address"></div>
-                    <p>Email Address:
-                        <input type="text" name="email" value="">
+                    <p align="center">Email Address: <input type="text" name="email" value="" style="
+                            width: 168px;
+                            height: 26px;
+                            margin-bottom: 0px;
+                            padding-right: 4px;
+                            padding-left: 4px;
+                            padding-top: 4px;
+                            padding-bottom: 4px;">
                     </p>
-                    <p>Severity of trash: 0
+                    <p align="center">Severity of trash: 0
                         <input type="range" name="trash" min="1" max="10">10</p>
-                    <p>Attach a photo:
-                        <input type="file" name="photo" allow="image/*">
+                    <p align="center">Attach a photo: <input type="file" name="photo" allow="image/*" style="width:200px">
                         <p>
                             <p>
                                 <input type="submit" name="button" value="Submit">
