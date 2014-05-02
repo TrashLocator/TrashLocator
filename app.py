@@ -1,5 +1,6 @@
 from flask import Flask,session,request,redirect,url_for
 from flask import render_template
+from datetime import date
 import csv, shelve, time, json
 import os,hashlib
 
@@ -19,7 +20,20 @@ def index():
             
 @app.route("/map", methods=['GET','POST'])
 def map(): 
-    return render_template("map.html")
+    if request.method == "GET":
+                return render_template("map2.html")
+
+    else:
+        curdate = date.today().isoformat()
+        email = request.form["email"]
+        image = request.form["photo"]
+        address = ""#request.form["email"]
+        latitude = ""#request.form["email"]
+        longitude = ""#request.form["email"]
+        severity = request.form["trash"]
+        return db.log(curdate,email,image,address,latitude,longitude,severity)
+        
+    return render_template("map2.html")
 
 @app.route("/heat", methods=['GET','POST'])
 def heat(): 
