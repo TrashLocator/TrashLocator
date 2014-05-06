@@ -1266,9 +1266,11 @@ meta.foundation-mq-topbar {
     color: #FFD700;
     padding: 12px 0 12px 0;
     padding-left: 15px;
-    font-family: 'Source Sans Pro', sans-serif;
-    font-size: 0.8125rem;
+    /*font-family: 'Source Sans Pro', sans-serif;*/
+    font-family: "Verdana", "Geneva", "sans-serif";
+    font-size: 0.8125em;
     font-weight: normal;
+    letter-spacing:2px;
     background: #171734; }
     .top-bar-section ul li > a.button {
       background: #008cba;
