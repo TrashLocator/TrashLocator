@@ -8,8 +8,10 @@
     <link rel="stylesheet" href="{{ url_for('static', filename='css/foundation.css') }}" />
     <link rel="stylesheet" type="text/css" href={{ url_for('static', filename='css/map.css') }}>
     <script src="https://maps.googleapis.com/maps/api/js?v=3.exp&sensor=false&libraries=places"></script>
+    <script src={{ url_for('static', filename='js/geo.js') }}></script>
     <script src={{ url_for('static', filename='js/map.js') }}></script>
     <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.11.0/jquery.min.js"></script>
+    <script src="{{ url_for('static', filename='js/vendor/custom.modernizr.js') }}"></script>
 </head>
 
 <body>
@@ -216,7 +218,7 @@
                 <p>Below is a sample report posted via Google+. Please describe the situation in the body of the post. Then follow with the hashtag <b>#TrashPickupNYC #(Your Neighborhood) #(Optional: Street Intersection)</b>. You may also upload a photo along
                     with the post.
                     <p>
-                        <div class="g-post" data-href="https://plus.google.com/107309753046337293392/posts/Jq4LRxDcuJi"></div>
+                        <div class="g-post" data-href="https://plus.google.com/107309753046337293392/posts/Jq4LRxDcuJi" data-width="100px"></div>
                         <p>hi</p>
             </div>
         </div>

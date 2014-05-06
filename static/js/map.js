@@ -286,6 +286,23 @@ function buildMap() {
 
     map.controls[google.maps.ControlPosition.TOP_RIGHT].push(geoLocationDiv);
 
+    var paths = [];
+ for (var i=0; i< polygons.length; i++)
+ { 
+   for (var j=0; j<polygons[i].length; j++) 
+   {
+     if (!paths[i]) paths[i] = [];
+     paths[i].push(new google.maps.LatLng(polygons[i][j].lat, polygons[i][j].lng));
+   }
+ }
+ polygon = new google.maps.Polygon({
+                 paths: paths,
+                 strokeColor: "#0000FF",
+                 strokeOpacity: 0,
+                 fillOpacity: 0
+     });
+     polygon.setMap(map);
+
 }
 
 //Places marker in given position (used only at init or to place new marker)
