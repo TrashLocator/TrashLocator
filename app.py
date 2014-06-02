@@ -21,7 +21,7 @@ def index():
 @app.route("/map", methods=['GET','POST'])
 def map(): 
     if request.method == "GET":
-                return render_template("map2.html")
+                return render_template("map.html")
 
     else:
         curdate = date.today().isoformat()
@@ -33,7 +33,7 @@ def map():
         severity = request.form["trash"]
         return db.log(curdate,email,image,address,latitude,longitude,severity)
         
-    return render_template("map2.html")
+    return render_template("map.html")
 
 @app.route("/heat", methods=['GET','POST'])
 def heat(): 
