@@ -76,7 +76,7 @@
     </section>
   </nav>
     <input id="pac-input" class="controls" type="text" placeholder="Search Box" style="top:20px">
-    <div id="map" style="width: 100%; height: 95.135%;"></div>
+    <div id="map" style="width: 100%; height: -moz-calc(100% - 45px); height: -webkit-calc(100% - 45px); height: calc(100% - 45px);"></div>
     <!-- Tabs of first marker -->
     <div id="wrapper1" class="wrapper">
         <div id="firstTabs" class="tabs">
@@ -104,9 +104,16 @@
                     <b>Closest matching address:</b>
                     
                     
-
+                    
                     <div id="address"></div>
-                    <select>
+                    
+                    <br>
+                    <b>Request Type</b>
+                    <select style="
+                        height: 27px;
+                        width: 168px;
+                        padding-top: 4px;
+                        padding-bottom: 4px;">
                       <option value="">Garbage/Recycling</option>
                       <option value="">Dirty Sidewalk</option>
                       <option value="">Dirty Yard/Alley</option>
