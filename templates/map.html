@@ -45,27 +45,8 @@
         <li class="has-dropdown">
           <a href="#">RESOURCES</a>
           <ul class="dropdown">
-            <li><label>Section Name</label></li>
-            <li class="has-dropdown">
-              <a href="#" class="">Has Dropdown, Level 1</a>
-              <ul class="dropdown">
-                <li><a href="#">Dropdown Options</a></li>
-                <li><a href="#">Dropdown Options</a></li>
-                <li class="has-dropdown">
-                  <a href="#">Has Dropdown, Level 2</a>
-                  <ul class="dropdown test">
-                    <li><a href="#">Subdropdown Option</a></li>
-                    <li><a href="#">Subdropdown Option</a></li>
-                    <li><a href="#">Subdropdown Option</a></li>
-                  </ul>
-                </li>
-                <li><a href="#">Subdropdown Option</a></li>
-                <li><a href="#">Subdropdown Option</a></li>
-                <li><a href="#">Subdropdown Option</a></li>
-              </ul>
-            </li>
             <li><a href="#">Dropdown Option</a></li>
-            <li><a href="#">Dropdown Option</a></li>
+            <li><a href="http://www1.nyc.gov/apps/311srmap/">311 Online Service Request Map</a></li>
             <li class="divider"></li>
             <li><label>Section Name</label></li>
             <li><a href="#">Dropdown Option</a></li>
@@ -121,8 +102,19 @@
 
                 <form method="POST" align="center" id="reportForm">
                     <b>Closest matching address:</b>
+                    
+                    
 
                     <div id="address"></div>
+                    <select>
+                      <option value="">Garbage/Recycling</option>
+                      <option value="">Dirty Sidewalk</option>
+                      <option value="">Dirty Yard/Alley</option>
+                      <option value="">Dead Animal</option>
+                      <option value="">Dumping</option>
+                      <option value="">Graffiti</option>
+                      <option value="">Garbage in Street</option>
+                    </select>
                     <p align="center">Email Address: <input type="text" name="email" value="" style="
                             width: 168px;
                             height: 26px;
@@ -237,6 +229,11 @@
         <img width="71" height="29" src="https://lh6.googleusercontent.com/-OBKReeczUaA/U2PHrJA48FI/AAAAAAAAAEA/uYIqYsgyN5s/w502-h152-no/powerlogo.png" style="position:absolute; bottom:2px; left:74px; display:block; width:120px!important; height:45px!important; border:none; outline:none;" alt="CartoDB" title="CartoDB" data-dynamite-selected="true">
         </a></div>
     <script type="text/javascript" src="https://apis.google.com/js/plusone.js"></script>
+    <script src="{{ url_for('static', filename='js/jquery.js')}}"></script>
+    <script src="{{ url_for('static', filename='js/foundation.min.js')}}"></script>
+    <script>
+      $(document).foundation();
+    </script>
 </body>
 
 </html>
