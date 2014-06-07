@@ -1,6 +1,7 @@
 from flask import Flask,session,request,redirect,url_for
 from flask import render_template
 from datetime import date
+from geopy import geocoders
 import csv, shelve, time, json
 import os,hashlib
 
@@ -25,13 +26,15 @@ def map():
 
     else:
         curdate = date.today().isoformat()
+        type = request.form["type"]
         email = request.form["email"]
         image = request.form["photo"]
-        address = ""#request.form["email"]
-        latitude = ""#request.form["email"]
-        longitude = ""#request.form["email"]
+        address = request.args.address
+        place, (lat, lng) = g.geocode(str(address)) 
+        latitude = lat
+        longitude = lng
         severity = request.form["trash"]
-        return db.log(curdate,email,image,address,latitude,longitude,severity)
+        return db.log(curdate,type,email,image,address,latitude,longitude,severity)
         
     return render_template("map.html")
 

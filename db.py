@@ -10,8 +10,8 @@ db = client.TPIS
 
 history = db.history
 
-def log(date, email, address, lat, lng):
-	history.insert({ "date" : date, "email": email, "address" : address, "lat" : lat, "lng" : lng})
+def log(date,type, email, address, lat, lng):
+	history.insert({ "date" : date, "type" : type, "email": email, "address" : address, "lat" : lat, "lng" : lng})
 
 #logging 311 api
 #log(c['created_date'],'blah',c['incident_address'] + " " + c['incident_zip'],c['latitude'],c['longitude'])
