@@ -161,16 +161,16 @@
 
                 <p>Below is a sample report posted via Twitter. Please describe the situation in the body of the tweet. Then follow with the hashtag <b>#TrashPickupNYC #(Your Neighborhood) #(Optional: Street Intersection)</b>. You may also upload a photo
                     onto the tweet.</p>
-                <blockquote class="twitter-tweet" lang="en">
-                    <p>Clean up here please. <a href="https://twitter.com/search?q=%23TrashPickupNYC&amp;src=hash">#TrashPickupNYC</a>
-
-                        <a href="https://twitter.com/search?q=%23Tribeca&amp;src=hash">#Tribeca</a>  <a href="https://twitter.com/search?q=%23345Chambers&amp;src=hash">#345Chambers</a>
-
-                        <a href="http://t.co/wpItU9vf7v">pic.twitter.com/wpItU9vf7v</a>
-
-                    </p>&mdash; NYC Trash Locator (@NYCTrashLocator) <a href="https://twitter.com/NYCTrashLocator/statuses/454624168605007872">April 11, 2014</a>
-
-                </blockquote>
+                <script src=”http://platform.twitter.com/anywhere.js?id=LmQLYIU8uWBWR4SLDDrqM3KsZ&v=1″ type=”text/javascript”></script>
+                <span id=”login”></span>
+                <script type=”text/javascript”>
+                    twttr.anywhere(function (T) {
+                        T(“#login”).connectButton();
+                    });
+                
+                </script>
+                <img src="https://lh3.googleusercontent.com/-fQP1oEbqCfk/U5nQIi4Pg_I/AAAAAAAAAGE/Tk9N17aHfuc/w306-h310-no/twitter.png" width=99%></img>
+                <br>
                 <script async src="//platform.twitter.com/widgets.js" charset="utf-8"></script>
                 <br>
                 <a href="https://twitter.com/intent/tweet?button_hashtag=TrashPickupNYC" class="twitter-hashtag-button" data-size="large">Tweet #TrashPickupNYC</a>
@@ -190,6 +190,7 @@
             <p>Below is a sample report posted via Facebook. Please describe the situation in the body of the post. Then follow with the hashtag <b>#TrashPickupNYC #(Your Neighborhood) #(Optional: Street Intersection)</b>. You may also upload a photo along
                 with the post.
                 <p>
+                
                     <div id="fb-root"></div>
                     <script>
                         (function (d, s, id) {
@@ -201,7 +202,6 @@
                             fjs.parentNode.insertBefore(js, fjs);
                         }(document, 'script', 'facebook-jssdk'));
                     </script>
-                    <div class="fb-login-button" data-max-rows="1" data-size="medium" data-show-faces="false" data-auto-logout-link="true"></div>
                     <div class="fb-post" data-href="https://www.facebook.com/photo.php?fbid=1374286702855385&amp;set=a.1374286729522049.1073741827.100008222040193&amp;type=1" data-width="466">
                         <div class="fb-xfbml-parse-ignore"><a href="https://www.facebook.com/photo.php?fbid=1374286702855385&amp;set=a.1374286729522049.1073741827.100008222040193&amp;type=1">Post</a> by <a href="https://www.facebook.com/profile.php?id=100008222040193">Trash Locator</a>.</div>
                     </div>
@@ -234,7 +234,7 @@
     
     <div class="cartodb-logo" style="position:absolute; bottom:0; left:0; display:block; border:none; z-index:1000000;">
         <a href="/" target="_blank">
-        <img width="71" height="29" src="https://lh6.googleusercontent.com/-OBKReeczUaA/U2PHrJA48FI/AAAAAAAAAEA/uYIqYsgyN5s/w502-h152-no/powerlogo.png" style="position:absolute; bottom:2px; left:74px; display:block; width:120px!important; height:45px!important; border:none; outline:none;" alt="CartoDB" title="CartoDB" data-dynamite-selected="true">
+        <img width="71" height="29" src="https://lh6.googleusercontent.com/-OBKReeczUaA/U2PHrJA48FI/AAAAAAAAAEA/uYIqYsgyN5s/w502-h152-no/powerlogo.png" style="position:absolute; bottom:2px; left:74px; display:block; width:120px!important; height:45px!important; border:none; outline:none;" alt="TrashLocator" title="TrashLocator" data-dynamite-selected="true">
         </a></div>
     <script type="text/javascript" src="https://apis.google.com/js/plusone.js"></script>
     <script src="{{ url_for('static', filename='js/jquery.js')}}"></script>
