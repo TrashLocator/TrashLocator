@@ -102,69 +102,72 @@ background-repeat:repeat-y;
  
 <br>
 <br>
+ <div class="row">
  
-
-<!-- First Band (Slider) -->
+   
  
-  <div class="row">
-    <div class="large-12 columns">
-      <ul class="example-orbit" data-orbit>
-        <li><img src=
-        "{{ url_for('static', filename='img/trashimg.jpg') }}" ></li>
-        <li><img src=
-        "http://placehold.it/1000x400&amp;text=[%20img%202%20]"></li>
-        <li><img src=
-        "http://placehold.it/1000x400&amp;text=[%20img%203%20]"></li>
-      </ul>
-    </div>
-  </div>
-
-    </div>
-  </div>
-  
-<!-- Three-up Content Blocks -->
+        <div class="large-4 small-12 columns">
  
-  <div class="row">
-    <div class="large-4 columns" onmouseover="lightup()" onmouseout="off()" id="one">
-      <img id ="img1" src="{{ url_for('static', filename='img/hudson.jpg') }}"/>
-      <h4>Why Use This?</h4>
-      <p >Trashlocator is necessary for a healthy environment. Nowadays, trash is literally everywhere. One can take a look at the Hudson river and find soda cans, candy wrappers, and much more garbage. No one wants to ruin the environment for their future generations, right?</p>
-    </div>
-    
-    <div class="large-4 columns" onmouseover="lightup1()" onmouseout="off1()" id="two">
-      <img id = "img2" src="{{ url_for('static', filename='img/sanitation.jpg') }}" />
-      <h4>What This Does.</h4>
-      <p >The user can track progress of waste removal from the street and is given the ability to provide input to the Department of Sanitation for the development of trends of where an abundance of trash and waste will be in the City of New York so that its removal can be better coordinated.</p>
-    </div>
-    
-    <div class="large-4 columns" onmouseover="lightup2()" onmouseout="off2()" id="three">
-      <img id = "img3" src="{{ url_for('static', filename='img/foundation.png') }}" />
-      <h4>What makes this possible?</h4>
-      <p >Thanks to various apis such as the google map api, we can locate trash efficiently. Moreover, this website is created using foundation, so the foundation developers deserve credit as well. Lastly, this is brought to you by Stuyvesant High School Software Development period 6. :)</p>
-    </div>
-  
-    </div>
-    
-<!-- Call to Action Panel -->
-<div class="row" id="blah">
-    <div class="large-12 columns">
-    
-      <div class="panel">
-        <h4>Github!</h4>
-            
-        <div class="row">
-          <div class="large-9 columns">
-            <p>Check out our Github repository!</p>
+          <img src="{{ url_for('static', filename='img/trashicon.jpg') }}">
+ 
+          <div class="hide-for-small panel">
+            <h3>Header</h3>
+            <h5 class="subheader">Just some briefs
+</h5>
           </div>
-          <div class="large-3 columns">
-            <a href="https://github.com/TrashLocator/TrashLocator" class="radius button right">Pushhhh!</a>
+ 
+          <a href="#">
+          <div class="panel callout radius">
+            <h6>THE FOUR MEMBERS</h6>
           </div>
+          </a>
+ 
         </div>
-      </div>
-      
-    </div>
-  </div>
+  <div class="large-8 columns">
+          <div class="row">
  
+            <div class="small-6 large-centered columns">
+              <img src="http://placehold.it/1000x1000&text=Thumbnail">
+ 
+              <div class="panel">
+                <h5>Derek Tang</h5>
+                <h6 class="subheader">Back End</h6>
+              </div>
+            </div>
+ <br>
+            <div class="small-6 large-centered columns">
+              <img src="http://placehold.it/500x500&text=Thumbnail">
+ 
+              <div class="panel">
+                <h5>Kelvin Mei</h5>
+                <h6 class="subheader">Front End</h6>
+              </div>
+            </div>
+ <br>
+            <div class="small-6 large-centered columns">
+              <img src="http://placehold.it/500x500&text=Thumbnail">
+ 
+              <div class="panel">
+                <h5>Tak Chi Wan</h5>
+                <h6 class="subheader">Linking to Social Media</h6>
+              </div>
+            </div>
+<br>
+ <div class="small-6 large-centered columns">
+              <img src="http://placehold.it/500x500&text=Thumbnail">
+ 
+              <div class="panel">
+                <h5>Shaan Sheikh</h5>
+                <h6 class="subheader">Other Stuff</h6>
+              </div>
+            </div>
+ 
+            
+ 
+        
+</div>
+
+
   <!-- Footer -->
   
   <footer class="row">
@@ -189,29 +192,7 @@ background-repeat:repeat-y;
     
 
     <!--________________________________________________________________________-->
-<script>
-function lightup(){
-document.getElementById("one").style.color="yellow";
-}
-function off(){
-document.getElementById("one").style.color="aqua";
-}
-function lightup1(){
-document.getElementById("two").style.color="yellow";
-}
-function off1(){
-document.getElementById("two").style.color="aqua";
-}
-function lightup2(){
-document.getElementById("three").style.color="yellow";
-}
-function off2(){
-document.getElementById("three").style.color="aqua";
-}
 
-
-
-</script>
     <script src="{{ url_for('static', filename='js/jquery.js')}}"></script>
     <script src="{{ url_for('static', filename='js/foundation.min.js')}}"></script>
     <script>
