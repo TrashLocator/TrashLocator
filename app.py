@@ -18,7 +18,7 @@ def index():
         if button == "Submit":
             loc=request.form['location'].encode("utf8")
             lev=request.form['trash'].encode("utf8")
-            
+
 @app.route("/map", methods=['GET','POST'])
 def map(): 
     if request.method == "GET":
@@ -41,7 +41,10 @@ def map():
 @app.route("/heat", methods=['GET','POST'])
 def heat(): 
     return render_template("heatmap.html")
-    
+
+@app.route("/about", methods=['GET','POST'])
+def about(): 
+    return render_template("about.html")    
 
 if __name__=="__main__":
     app.debug=True
